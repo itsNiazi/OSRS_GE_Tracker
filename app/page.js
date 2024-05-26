@@ -1,6 +1,7 @@
 "use client";
 import getItem from "@/api/getItem";
 import getItemGraph from "@/api/getItemGraph";
+import { Button } from "@/components/ui/button";
 
 export default function Application() {
   async function handleSearch() {
@@ -11,7 +12,9 @@ export default function Application() {
   }
   return (
     <>
-      <button onClick={handleSearch}>Click!</button>
+      <Button variant="tw" size="lg" onClick={handleSearch}>
+        Click me!
+      </Button>
     </>
   );
 }

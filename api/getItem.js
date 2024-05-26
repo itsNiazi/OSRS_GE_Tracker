@@ -3,7 +3,7 @@
 export default async function getItem() {
   const baseURL =
     "https://secure.runescape.com/m=itemdb_oldschool/api/catalogue/items.json?category=1&alpha=";
-  const query = "partyhat";
+  const query = "adamant 2h";
   const queryURL = `${baseURL}${query}&page=1`;
   const response = await fetch(queryURL);
   return response.json();
