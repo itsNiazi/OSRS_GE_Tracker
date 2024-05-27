@@ -10,7 +10,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <GlobalContextProvider>{children}</GlobalContextProvider>
+        {/* Choose a more semantic tag */}
+        <div className="container mx-auto">
+          <GlobalContextProvider>{children}</GlobalContextProvider>
+        </div>
       </body>
     </html>
   );

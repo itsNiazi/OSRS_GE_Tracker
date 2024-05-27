@@ -2,6 +2,7 @@
 
 import { useGlobalContext } from "@/context/globalContext";
 import SearchForm from "@/components/SearchForm";
+import CardList from "@/components/CardList";
 
 export default function Application() {
   const {
@@ -17,6 +18,7 @@ export default function Application() {
         addSearchedItems={addSearchedItems}
         addSearchedItemsGraphs={addSearchedItemsGraphs}
       />
+      <CardList items={searchedItems} />
     </>
   );
 }
