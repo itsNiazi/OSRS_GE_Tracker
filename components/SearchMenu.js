@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Command,
   CommandDialog,
@@ -14,34 +14,38 @@ export default function SearchMenu({ addSearchedItems, items }) {
   const [itemQuery, setItemQuery] = useState("");
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
+  const debounceTimeout = useRef(null);
 
   async function handleSearch() {
     if (!itemQuery) {
       setError("Please enter an item!");
       return;
     }
-
-    try {
-      setError("");
-      const response = await getItem(itemQuery.toLowerCase());
-      console.log(response);
-
-      const itemId = response.items[0].id;
-      //This for now only retrieves the graph for the first returned item.
-      //Need to be reworked to perhaps return data for specific item onEvent with modal/dialog?
-      addSearchedItems(response.items);
-    } catch (err) {
-      setError("An error occured while fetching the requested item!");
-      console.log(error);
-    } finally {
+    if (itemQuery.length > 2) {
+      try {
+        setError("");
+        const response = await getItem(itemQuery.toLowerCase());
+        console.log(response);
+        addSearchedItems(response.items);
+      } catch (err) {
+        setError("An error occured while fetching the requested item!");
+        console.log(error);
+      } finally {
+      }
     }
   }
 
   function handleChange(e) {
-    const query = e.target.value;
-    console.log(query);
-    setItemQuery(query);
-    handleSearch();
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
+    }
+
+    debounceTimeout.current = setTimeout(() => {
+      //kontrollera mulitple renders bra/dåligt?
+      //har lagt den här jämför innan-/utanför
+      setItemQuery(e.target.value);
+      handleSearch(itemQuery);
+    }, 300);
   }
 
   useEffect(() => {
@@ -63,6 +67,7 @@ export default function SearchMenu({ addSearchedItems, items }) {
           <span className="text-xs">⌘</span>K
         </kbd>
       </p>
+      {/* lägg till elemnent för error rendering (kontrollera shadcn) */}
       <CommandDialog open={open} onOpenChange={setOpen}>
         <Command>
           <CommandInput
