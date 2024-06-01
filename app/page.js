@@ -1,7 +1,7 @@
 "use client";
 
 import { useGlobalContext } from "@/context/globalContext";
-import SearchForm from "@/components/SearchForm";
+import SearchMenu from "@/components/SearchMenu";
 
 export default function Application() {
   const {
@@ -13,10 +13,7 @@ export default function Application() {
 
   return (
     <>
-      <SearchForm
-        addSearchedItems={addSearchedItems}
-        addSearchedItemsGraphs={addSearchedItemsGraphs}
-      />
+      <SearchMenu addSearchedItems={addSearchedItems} items={searchedItems} />
     </>
   );
 }

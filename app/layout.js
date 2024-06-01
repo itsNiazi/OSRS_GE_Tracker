@@ -9,8 +9,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-        <GlobalContextProvider>{children}</GlobalContextProvider>
+      <body className="bg-gray-950">
+        {/* Choose a more semantic tag */}
+        <div className="container mx-auto">
+          <GlobalContextProvider>{children}</GlobalContextProvider>
+        </div>
       </body>
     </html>
   );

@@ -8,7 +8,7 @@ export const GlobalContextProvider = ({ children }) => {
   const [searchedItemsGraphs, setSearchedItemsGraphs] = useState([]);
 
   function addSearchedItems(items) {
-    setSearchedItems([items]);
+    setSearchedItems(items);
   }
   function addSearchedItemsGraphs(items) {
     setSearchedItemsGraphs(items);
