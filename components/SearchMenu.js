@@ -8,6 +8,7 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
+import Link from "next/link";
 import getItem from "@/api/getItem";
 
 export default function SearchMenu({ addSearchedItems, items }) {
@@ -42,10 +43,11 @@ export default function SearchMenu({ addSearchedItems, items }) {
 
     debounceTimeout.current = setTimeout(() => {
       //kontrollera mulitple renders bra/dåligt?
+      //krockar med onChange? att det inte registrerat
       //har lagt den här jämför innan-/utanför
       setItemQuery(e.target.value);
       handleSearch(itemQuery);
-    }, 300);
+    }, 200);
   }
 
   useEffect(() => {
@@ -79,19 +81,21 @@ export default function SearchMenu({ addSearchedItems, items }) {
             <CommandGroup>
               {items.map((item, index) => (
                 <CommandItem key={index} value={item.name}>
-                  <div className="flex items-center space-x-4">
-                    <img
-                      src={item.icon_large}
-                      alt={item.description}
-                      width={50}
-                    />
-                    <div>
-                      <p className="text-sm font-medium">{item.name}</p>
-                      <p className="text-xs text-muted-foreground">
-                        {item.description}
-                      </p>
+                  <Link href={``}>
+                    <div className="flex items-center space-x-4">
+                      <img
+                        src={item.icon_large}
+                        alt={item.description}
+                        width={50}
+                      />
+                      <div>
+                        <p className="text-sm font-medium">{item.name}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {item.description}
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 </CommandItem>
               ))}
             </CommandGroup>
