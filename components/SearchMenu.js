@@ -45,6 +45,7 @@ export default function SearchMenu({ addSearchedItems, items }) {
       //kontrollera mulitple renders bra/dåligt?
       //krockar med onChange? att det inte registrerat
       //har lagt den här jämför innan-/utanför
+      //useRef istället för useState för att minimera rendering?
       setItemQuery(e.target.value);
       handleSearch(itemQuery);
     }, 200);
@@ -81,7 +82,7 @@ export default function SearchMenu({ addSearchedItems, items }) {
             <CommandGroup>
               {items.map((item, index) => (
                 <CommandItem key={index} value={item.name}>
-                  <Link href={``}>
+                  <Link href={`/item/${item.id}`}>
                     <div className="flex items-center space-x-4">
                       <img
                         src={item.icon_large}
