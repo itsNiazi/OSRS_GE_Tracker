@@ -26,7 +26,8 @@ export default function Application({ params }) {
       const fetchItemGraph = async () => {
         try {
           setIsLoading(true);
-          // const response = await getItemGraph(itemId);
+          const response = await getItemGraph(itemId);
+          addSearchedItemsGraphs(response);
           console.log(response);
           console.log(searchedItems);
         } catch (error) {
@@ -36,14 +37,16 @@ export default function Application({ params }) {
         }
       };
 
-      // fetchItemGraph();
+      fetchItemGraph();
     }
   }, []);
 
   return (
     <>
       <SearchMenu addSearchedItems={addSearchedItems} items={searchedItems} />
-      {currentItem && <ItemCard item={currentItem} />}
+      {currentItem && (
+        <ItemCard item={currentItem} itemGraph={searchedItemsGraphs} />
+      )}
     </>
   );
 }
