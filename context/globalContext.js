@@ -6,6 +6,7 @@ const GlobalContext = createContext();
 export const GlobalContextProvider = ({ children }) => {
   const [searchedItems, setSearchedItems] = useState([]);
   const [searchedItemsGraphs, setSearchedItemsGraphs] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   function addSearchedItems(items) {
     setSearchedItems(items);
@@ -21,6 +22,8 @@ export const GlobalContextProvider = ({ children }) => {
         addSearchedItems,
         searchedItemsGraphs,
         addSearchedItemsGraphs,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}
