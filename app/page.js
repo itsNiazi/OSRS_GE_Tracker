@@ -5,12 +5,7 @@ import SearchMenu from "@/components/SearchMenu";
 import HeroSection from "@/components/HeroSection";
 
 export default function Application() {
-  const {
-    searchedItems,
-    addSearchedItems,
-    searchedItemsGraphs,
-    addSearchedItemsGraphs,
-  } = useGlobalContext();
+  const { searchedItems, addSearchedItems } = useGlobalContext();
 
   return (
     <>

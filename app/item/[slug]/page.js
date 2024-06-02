@@ -7,7 +7,7 @@ import SearchMenu from "@/components/SearchMenu";
 import ItemCard from "@/components/ItemCard";
 
 export default function ItemDetails({ params }) {
-  //UseMemo instead?
+  //usememo instead?
   const [currentItem, setCurrentItem] = useState();
   const {
     searchedItems,
@@ -38,16 +38,24 @@ export default function ItemDetails({ params }) {
         }
       };
 
-      fetchItemGraph();
+      if (item) {
+        fetchItemGraph();
+      }
     }
   }, []);
 
   return (
     <>
       {currentItem && (
-        <ItemCard item={currentItem} itemGraph={searchedItemsGraphs} />
+        <ItemCard
+          isLoading={isLoading}
+          item={currentItem}
+          itemGraph={searchedItemsGraphs}
+        />
       )}
-      <SearchMenu addSearchedItems={addSearchedItems} items={searchedItems} />
+      {!isLoading && (
+        <SearchMenu addSearchedItems={addSearchedItems} items={searchedItems} />
+      )}
     </>
   );
 }

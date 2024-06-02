@@ -9,6 +9,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import Link from "next/link";
+import Image from "next/image";
 import getItem from "@/api/getItem";
 
 export default function SearchMenu({ addSearchedItems, items }) {
@@ -82,12 +83,14 @@ export default function SearchMenu({ addSearchedItems, items }) {
             <CommandGroup>
               {items.map((item, index) => (
                 <CommandItem key={index} value={item.name}>
-                  <Link href={`/item/${item.id}`}>
-                    <div className="flex items-center space-x-4">
-                      <img
+                  <Link className="w-full" href={`/item/${item.id}`}>
+                    <div className="flex items-center space-x-4 ">
+                      <Image
                         src={item.icon_large}
                         alt={item.description}
                         width={50}
+                        height={50}
+                        layout="fixed"
                       />
                       <div>
                         <p className="text-sm font-medium">{item.name}</p>
