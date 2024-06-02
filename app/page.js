@@ -2,6 +2,7 @@
 
 import { useGlobalContext } from "@/context/globalContext";
 import SearchMenu from "@/components/SearchMenu";
+import HeroSection from "@/components/HeroSection";
 
 export default function Application() {
   const {
@@ -13,6 +14,7 @@ export default function Application() {
 
   return (
     <>
+      <HeroSection />
       <SearchMenu addSearchedItems={addSearchedItems} items={searchedItems} />
     </>
   );

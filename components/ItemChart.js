@@ -34,12 +34,12 @@ export default function ItemChart({ data }) {
       {
         label: "Daily Prices",
         data: dailyPrices,
-        borderColor: "rgb(75, 192, 192)",
+        borderColor: "#F59E0C",
       },
       {
         label: "Average Prices",
         data: averagePrices,
-        borderColor: "rgb(153, 102, 255)",
+        borderColor: "#57534E",
       },
     ],
   };
