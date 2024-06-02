@@ -1,3 +1,4 @@
+//Kika på charts dokumentation
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -15,6 +16,7 @@ ChartJS.register(
   PointElement,
   LinearScale,
   CategoryScale,
+  Title,
   Tooltip,
   Legend
 );
@@ -32,16 +34,12 @@ export default function ItemChart({ data }) {
       {
         label: "Daily Prices",
         data: dailyPrices,
-        fill: false,
         borderColor: "rgb(75, 192, 192)",
-        tension: 0.1,
       },
       {
         label: "Average Prices",
         data: averagePrices,
-        fill: false,
         borderColor: "rgb(153, 102, 255)",
-        tension: 0.1,
       },
     ],
   };

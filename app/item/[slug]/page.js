@@ -6,7 +6,8 @@ import getItemGraph from "@/api/getItemGraph";
 import SearchMenu from "@/components/SearchMenu";
 import ItemCard from "@/components/ItemCard";
 
-export default function Application({ params }) {
+export default function ItemDetails({ params }) {
+  //UseMemo instead?
   const [currentItem, setCurrentItem] = useState();
   const {
     searchedItems,
@@ -43,10 +44,10 @@ export default function Application({ params }) {
 
   return (
     <>
-      <SearchMenu addSearchedItems={addSearchedItems} items={searchedItems} />
       {currentItem && (
         <ItemCard item={currentItem} itemGraph={searchedItemsGraphs} />
       )}
+      <SearchMenu addSearchedItems={addSearchedItems} items={searchedItems} />
     </>
   );
 }

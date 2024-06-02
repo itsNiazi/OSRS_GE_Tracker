@@ -9,9 +9,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="">
+      <body>
         {/* Choose a more semantic tag */}
-        <div className="container mx-auto">
+        {/* Kolla onödiga utility klasser */}
+        <div className="container mx-auto flex flex-col items-center justify-center min-h-screen">
           <GlobalContextProvider>{children}</GlobalContextProvider>
         </div>
       </body>
