@@ -30,28 +30,24 @@ export default function SearchMenu({ addSearchedItems, items }) {
       try {
         setError("");
         const response = await getItem(itemQuery.toLowerCase());
-        console.log(response);
         addSearchedItems(response.items);
       } catch (err) {
         setError("An error occured while fetching the requested item!");
-        console.log(error);
       } finally {
       }
     }
   }
+
   function handleChange(e) {
+    const inputValue = e.target.value;
     if (debounceTimeout.current) {
       clearTimeout(debounceTimeout.current);
     }
 
     debounceTimeout.current = setTimeout(() => {
-      //kontrollera mulitple renders bra/dåligt?
-      //krockar med onChange? att det inte registrerat
-      //har lagt den här jämför innan-/utanför
-      //useRef istället för useState för att minimera rendering?
-      setItemQuery(e.target.value);
-      handleSearch(itemQuery);
-    }, 200);
+      setItemQuery(inputValue);
+      handleSearch(inputValue);
+    }, 150);
   }
 
   useEffect(() => {
