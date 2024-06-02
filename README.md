@@ -18,6 +18,7 @@ Thus, the idea for the OSRS Grand Exchange Items and Price Tracker was born. It 
 - **Tailwind**
 
 ## Demo
+
 ![ScreenRecording2024-06-02at21 32 38-ezgif com-video-to-gif-converter](https://github.com/itsNiazi/OSRS_GE_Tracker/assets/104915520/7439b0ad-30d4-47bd-ade8-feb539914ee4)
 
 Example query used in video:
