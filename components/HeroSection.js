@@ -13,6 +13,7 @@ export default function HeroSection() {
           alt="coins"
           width={25}
           height={25}
+          priority={true}
         />
       </p>
       <p className="text-lg">

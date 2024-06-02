@@ -9,12 +9,16 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import Link from "next/link";
+import Image from "next/image";
 import getItem from "@/api/getItem";
+import ShortcutCommand from "./ui/shortcutCommand";
+import getOS from "../utils/getOS";
 
 export default function SearchMenu({ addSearchedItems, items }) {
   const [itemQuery, setItemQuery] = useState("");
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
+  const [os, setOS] = useState();
   const debounceTimeout = useRef(null);
 
   async function handleSearch() {
@@ -26,29 +30,24 @@ export default function SearchMenu({ addSearchedItems, items }) {
       try {
         setError("");
         const response = await getItem(itemQuery.toLowerCase());
-        console.log(response);
         addSearchedItems(response.items);
       } catch (err) {
         setError("An error occured while fetching the requested item!");
-        console.log(error);
       } finally {
       }
     }
   }
 
   function handleChange(e) {
+    const inputValue = e.target.value;
     if (debounceTimeout.current) {
       clearTimeout(debounceTimeout.current);
     }
 
     debounceTimeout.current = setTimeout(() => {
-      //kontrollera mulitple renders bra/dåligt?
-      //krockar med onChange? att det inte registrerat
-      //har lagt den här jämför innan-/utanför
-      //useRef istället för useState för att minimera rendering?
-      setItemQuery(e.target.value);
-      handleSearch(itemQuery);
-    }, 200);
+      setItemQuery(inputValue);
+      handleSearch(inputValue);
+    }, 150);
   }
 
   useEffect(() => {
@@ -62,15 +61,14 @@ export default function SearchMenu({ addSearchedItems, items }) {
     return () => document.removeEventListener("keydown", onDown);
   }, []);
 
+  useEffect(() => {
+    const osType = getOS();
+    setOS(osType);
+  }, []);
+
   return (
     <>
-      <p className="text-sm text-muted-foreground">
-        Press{" "}
-        <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-          <span className="text-xs">⌘</span>K
-        </kbd>
-      </p>
-      {/* lägg till elemnent för error rendering (kontrollera shadcn) */}
+      {os && <ShortcutCommand osType={os} />}
       <CommandDialog open={open} onOpenChange={setOpen}>
         <Command>
           <CommandInput
@@ -82,12 +80,13 @@ export default function SearchMenu({ addSearchedItems, items }) {
             <CommandGroup>
               {items.map((item, index) => (
                 <CommandItem key={index} value={item.name}>
-                  <Link href={`/item/${item.id}`}>
-                    <div className="flex items-center space-x-4">
-                      <img
+                  <Link className="w-full" href={`/item/${item.id}`}>
+                    <div className="flex items-center space-x-4 ">
+                      <Image
                         src={item.icon_large}
                         alt={item.description}
                         width={50}
+                        height={50}
                       />
                       <div>
                         <p className="text-sm font-medium">{item.name}</p>
