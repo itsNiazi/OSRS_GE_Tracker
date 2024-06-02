@@ -22,17 +22,40 @@ import ItemChart from "./ItemChart";
 
 export default function ItemCard({ item, itemGraph }) {
   return (
-    <Card className="w-[350px]">
+    <Card className="w-[300px] text-center">
       <CardHeader>
-        <img src={item.icon_large} alt={item.description} width={175} />
+        <img
+          className="mx-auto"
+          src={item.icon_large}
+          alt={item.description}
+          width={175}
+        />
         <CardTitle>{item.name}</CardTitle>
         <CardDescription>{item.description}</CardDescription>
       </CardHeader>
-      <CardContent>{item.current.price}</CardContent>
-      <CardFooter>
+      <CardContent>
+        <p className="font-semibold text-gray-400">
+          Price:
+          <span
+            className={` font-semibold ml-2 ${
+              item.today.trend === "negative"
+                ? "text-red-500"
+                : item.today.trend === "neutral"
+                ? "text-yellow-500"
+                : item.today.trend === "positive"
+                ? "text-green-500"
+                : "text-gray-500"
+            }
+      `}
+          >
+            {item.current.price}
+          </span>
+        </p>
+      </CardContent>
+      <CardFooter className="flex-col-reverse">
         <Drawer>
           <DrawerTrigger asChild>
-            <Button variant="outline">Price History</Button>
+            <Button variant="secondary">Price History</Button>
           </DrawerTrigger>
           <DrawerContent>
             <div className="mx-auto w-full max-w-sm">
@@ -49,7 +72,9 @@ export default function ItemCard({ item, itemGraph }) {
             </div>
           </DrawerContent>
         </Drawer>
-        <Badge>{item.members === "true" ? "Members" : "Free"}</Badge>
+        <Badge className="mb-3">
+          {item.members === "true" ? "Members" : "Free"}
+        </Badge>
       </CardFooter>
     </Card>
   );
