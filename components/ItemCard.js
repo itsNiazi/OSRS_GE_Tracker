@@ -22,7 +22,7 @@ import ItemChart from "./ItemChart";
 
 export default function ItemCard({ item, itemGraph }) {
   return (
-    <Card className="w-[300px] text-center">
+    <Card className="w-[300px] text-center mb-5">
       <CardHeader>
         <img
           className="mx-auto"

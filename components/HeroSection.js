@@ -5,7 +5,7 @@ export default function HeroSection() {
   return (
     <div className="text-center p-5 text-white">
       <h1 className="text-4xl mb-2">Welcome to the Grand Exchange Tracker!</h1>
-      <p className="text-xl my-2 ">
+      <p className="text-xl my-2">
         Where you can actually double your money
         <Image
           className="inline mx-2"
