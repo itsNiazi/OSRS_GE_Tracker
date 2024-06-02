@@ -7,8 +7,8 @@ import SearchMenu from "@/components/SearchMenu";
 import ItemCard from "@/components/ItemCard";
 
 export default function ItemDetails({ params }) {
-  //usememo instead?
   const [currentItem, setCurrentItem] = useState();
+  const [error, setError] = useState();
   const {
     searchedItems,
     addSearchedItems,
@@ -23,23 +23,20 @@ export default function ItemDetails({ params }) {
     if (itemId) {
       const item = searchedItems.find((item) => item.id === itemId);
       setCurrentItem(item);
+      if (item) {
+        fetchItemGraph();
+      }
 
-      const fetchItemGraph = async () => {
+      async function fetchItemGraph() {
         try {
           setIsLoading(true);
           const response = await getItemGraph(itemId);
           addSearchedItemsGraphs(response);
-          console.log(response);
-          console.log(searchedItems);
         } catch (error) {
-          console.log(error);
+          setError("Something went wrong, when fetching item graph!");
         } finally {
           setIsLoading(false);
         }
-      };
-
-      if (item) {
-        fetchItemGraph();
       }
     }
   }, []);

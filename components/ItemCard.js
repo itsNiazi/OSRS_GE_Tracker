@@ -33,7 +33,7 @@ export default function ItemCard({ isLoading, item, itemGraph }) {
               className="mx-auto"
               src={item.icon_large}
               alt={item.description}
-              width={175}
+              width={100}
             />
             <CardTitle>{item.name}</CardTitle>
             <CardDescription>{item.description}</CardDescription>

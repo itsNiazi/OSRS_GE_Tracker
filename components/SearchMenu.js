@@ -11,11 +11,14 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import getItem from "@/api/getItem";
+import ShortcutCommand from "./ui/shortcutCommand";
+import getOS from "../utils/getOS";
 
 export default function SearchMenu({ addSearchedItems, items }) {
   const [itemQuery, setItemQuery] = useState("");
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
+  const [os, setOS] = useState();
   const debounceTimeout = useRef(null);
 
   async function handleSearch() {
@@ -36,7 +39,6 @@ export default function SearchMenu({ addSearchedItems, items }) {
       }
     }
   }
-
   function handleChange(e) {
     if (debounceTimeout.current) {
       clearTimeout(debounceTimeout.current);
@@ -63,15 +65,14 @@ export default function SearchMenu({ addSearchedItems, items }) {
     return () => document.removeEventListener("keydown", onDown);
   }, []);
 
+  useEffect(() => {
+    const osType = getOS();
+    setOS(osType);
+  }, []);
+
   return (
     <>
-      <p className="text-sm text-muted-foreground">
-        Press{" "}
-        <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-          <span className="text-xs">⌘</span>K
-        </kbd>
-      </p>
-      {/* lägg till elemnent för error rendering (kontrollera shadcn) */}
+      {os && <ShortcutCommand osType={os} />}
       <CommandDialog open={open} onOpenChange={setOpen}>
         <Command>
           <CommandInput
@@ -90,7 +91,6 @@ export default function SearchMenu({ addSearchedItems, items }) {
                         alt={item.description}
                         width={50}
                         height={50}
-                        layout="fixed"
                       />
                       <div>
                         <p className="text-sm font-medium">{item.name}</p>
