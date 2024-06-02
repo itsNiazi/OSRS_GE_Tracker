@@ -9,12 +9,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-        {/* Choose a more semantic tag */}
-        {/* Kolla onödiga utility klasser */}
-        <div className="container mx-auto flex flex-col items-center justify-center min-h-screen">
+      <body className="bg-zinc-800">
+        <main className="container min-h-screen flex flex-col justify-center items-center ">
           <GlobalContextProvider>{children}</GlobalContextProvider>
-        </div>
+        </main>
       </body>
     </html>
   );
