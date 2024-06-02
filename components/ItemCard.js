@@ -55,7 +55,7 @@ export default function ItemCard({ item, itemGraph }) {
       <CardFooter className="flex-col-reverse">
         <Drawer>
           <DrawerTrigger asChild>
-            <Button variant="secondary">Price History</Button>
+            <Button variant="outline">Price History</Button>
           </DrawerTrigger>
           <DrawerContent>
             <div className="mx-auto w-full max-w-sm">
