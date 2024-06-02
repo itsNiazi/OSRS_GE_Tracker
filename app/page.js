@@ -3,7 +3,7 @@
 import { useGlobalContext } from "@/context/globalContext";
 import SearchMenu from "@/components/SearchMenu";
 
-export default function ItemDetails() {
+export default function Application() {
   const {
     searchedItems,
     addSearchedItems,
